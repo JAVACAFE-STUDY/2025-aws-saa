@@ -70,6 +70,26 @@ EC2는 다양한 사용 패턴에 맞춰 여러 가격 옵션을 제공합니다
 - **스팟 인스턴스:** 미사용 EC2 용량을 경매로 최대 90%까지 저렴하게 이용합니다.
 - **Savings Plans:** 유연한 할인 모델로, 사용량에 약정하여 할인을 받습니다.
 
+<img width="1285" height="731" alt="143" src="https://github.com/user-attachments/assets/43bd7f17-2322-48e0-9314-afc6ab63ebe6" />
+
+  
+<img width="1428" height="732" alt="image" src="https://github.com/user-attachments/assets/08dc3ac8-7b6e-4a78-a7a3-a9c025129244" />
+
+- https://aws.amazon.com/ko/blogs/compute/building-sustainable-efficient-and-cost-optimized-applications-on-aws/  
+- 고정적인 워크로드는 예약/세이빙플랜에서 실행
+- 유동적이며 중단되도 괜찮은 워크로드는 스팟에서 실행
+- 유동적이며 중단되면 안되는 워크로드는 온디멘드 실행
+
+
+<img width="895" height="457" alt="image" src="https://github.com/user-attachments/assets/3299fb43-2cf6-46ce-b170-216f6c7d13dc" />
+
+- https://spot.io/resources/aws-ec2-pricing/effective-utilization-of-aws-savings-plans-and-ec2-spot-instances/
+<img width="1200" height="579" alt="image" src="https://github.com/user-attachments/assets/706965a1-a53a-4786-a8bd-476738c415d6" />
+
+- https://www.nops.io/blog/aws-savings-plan-vs-reserved-instances/
+
+- 보통 이런식으로 워크로드를 분석해서 비용옵션 적용으로 저렴하게 해줄게 일부만 떼줘 하는 서비스형태도 있다
+
 ---
 
 ## S3 Storage Class & Lifecycle Policy
@@ -83,9 +103,18 @@ EC2는 다양한 사용 패턴에 맞춰 여러 가격 옵션을 제공합니다
   - S3 Glacier Deep Archive: 성능 및 비용 최하 
   - S3 Intelligent-Tiering: 자동으로 스토리지 클래스 분석 및 설정
 
+<img width="1273" height="1096" alt="image" src="https://github.com/user-attachments/assets/e854ec05-7fdc-4380-8099-14ea27a0558b" />
+
+- https://jibinary.tistory.com/129
+
 - 이러한 스토리지는 직접 지정할수도 있지만 규칙에 의해 자동화 가능
   - 특정 기간 이후 클래스 변경 또는 삭제
 
+
+<img width="815" height="470" alt="image" src="https://github.com/user-attachments/assets/d0584a75-c9e4-4813-8598-a4ff7ddff332" />
+
+- https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html  
+- 순차적 절감
 
 ---
 
@@ -106,4 +135,10 @@ EC2는 다양한 사용 패턴에 맞춰 여러 가격 옵션을 제공합니다
 | 지연/성능                                                          | ms 단위, 디스크 성능                     | 파일 워크로드용, 처리량 모드 선택      | 대규모/비정형 데이터, 스루풋 중심   |
 | 과금 기준                                                          | 용량+IOPS/스루풋(타입별)                  | 용량+처리량 모드                | 저장용량+요청+전송            |
 | 대표 사례                                                          | DB, 트랜잭션 스토리지, 부팅 볼륨              | 컨텐츠 리포지토리, 홈디렉토리, 웹서버 공유 | 백업/아카이브, 데이터레이크, 정적웹  |
+
+---
+
+# 요약
+
+<img width="2411" height="1072" alt="aws-saa drawio" src="https://github.com/user-attachments/assets/7d51962f-c717-4439-a477-c196f1b9eae5" />
 
