@@ -1,3 +1,21 @@
+# 목차
+- [이번 주의 주요 서비스](#이번-주의-주요-서비스)
+  - [Amazon Elastic Compute Cloud (EC2)](#amazon-elastic-compute-cloud-ec2)
+  - [AWS Lambda](#aws-lambda)
+  - [Amazon Simple Storage Service (S3)](#amazon-simple-storage-service-s3)
+  - [Amazon Elastic Block Storage (EBS)](#amazon-elastic-block-storage-ebs)
+  - [Amazon Elastic File System (EFS)](#amazon-elastic-file-system-efs)
+  - [Amazon Simple Notification Service (SNS)](#amazon-simple-notification-service-sns)
+  - [Amazon Simple Queue Service (SQS)](#amazon-simple-queue-service-sqs)
+- [자주 물어보는 내용](#자주-물어보는-내용)
+  - [EC2 가격 옵션](#ec2-가격-옵션)
+  - [S3 Storage Class & Lifecycle Policy](#s3-storage-class--lifecycle-policy)
+  - [SNS/SQS 활용](#snssqs-활용)
+  - [스토리지 비교: EBS, EFS, S3](#스토리지-비교-ebs-efs-s3)
+- [요약](#요약)
+
+---
+
 # 이번 주의 주요 서비스
 
 ## Amazon Elastic Compute Cloud (EC2)
@@ -141,4 +159,5 @@ EC2는 다양한 사용 패턴에 맞춰 여러 가격 옵션을 제공합니다
 # 요약
 
 <img width="2411" height="1072" alt="aws-saa drawio" src="https://github.com/user-attachments/assets/7d51962f-c717-4439-a477-c196f1b9eae5" />
+
 
