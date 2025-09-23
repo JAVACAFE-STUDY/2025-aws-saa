@@ -143,6 +143,12 @@
   - 여러 리전에 데이터 복제 → 리전 전체 장애에도 복구 가능  
 - **Cluster Endpoint / Reader Endpoint**:  
   - 연결 자동 분리 및 Failover 시 자동 재분배
+ 
+
+<img width="1246" height="701" alt="176" src="https://github.com/user-attachments/assets/bf98af52-5952-476a-a170-08e7b6097279" />
+<img width="1306" height="694" alt="177" src="https://github.com/user-attachments/assets/6834af81-ea88-44c3-a39e-f9fc5d9fd2b9" />
+
+---
 
 
 
