@@ -165,12 +165,9 @@ graph TB
 
         %% 퍼블릭 서브넷
         subgraph PUB["퍼블릭 서브넷"]
-            ALB["ALB (Application Load Balancer)"]
-            SG_ALB["SG (ALB 보안그룹)"]
-            NACL_PUB["NACL (퍼블릭 서브넷)"]
-
             EC2_PUB["EC2 Web/App Server"]
             SG_WEB["SG (Web/App 보안그룹)"]
+            NACL_PUB["NACL (퍼블릭 서브넷)"]
         end
 
         %% 프라이빗 서브넷
@@ -190,37 +187,34 @@ graph TB
     S3["Amazon S3"]
     DDB["Amazon DynamoDB"]
 
-    %% 퍼블릭 경로
-    Internet --> IGW --> NACL_PUB --> SG_ALB --> ALB --> SG_WEB --> EC2_PUB
-
-    %% 퍼블릭 EC2에서 인터넷 아웃바운드
+    %% 퍼블릭 → 인터넷 경로
+    Internet --> IGW --> NACL_PUB --> SG_WEB --> EC2_PUB
     EC2_PUB --> SG_WEB --> NACL_PUB --> IGW --> Internet
 
     %% 프라이빗 → 인터넷 (NAT)
     EC2_PRI --> SG_DB --> NACL_PRI --> NATGW --> IGW --> Internet
 
-    %% 프라이빗 → 엔드포인트 직접 통신
+    %% 프라이빗 → VPC 엔드포인트 (내부 통신)
     EC2_PRI --> SG_DB --> NACL_PRI --> VPCE --> S3
     EC2_PRI --> SG_DB --> NACL_PRI --> VPCE --> DDB
 
-    %% 스타일 정의
+    %% 색상 스타일
     classDef pubPath fill:#e6f2ff,stroke:#1e90ff,stroke-width:2px,color:#000;
     classDef priPath fill:#f3e6ff,stroke:#8a2be2,stroke-width:2px,color:#000;
     classDef endpoint fill:#fff8dc,stroke:#daa520,stroke-width:2px,color:#000;
 
-    class ALB,EC2_PUB,IGW,Internet pubPath;
+    class EC2_PUB,IGW,Internet pubPath;
     class EC2_PRI,NATGW priPath;
     class VPCE,S3,DDB endpoint;
 
     %% 범례
     subgraph Legend["범례"]
-        L1["파란색: 퍼블릭 경로 (IGW)"]
-        L2["보라색: 프라이빗 경로 (NAT GW)"]
-        L3["노란색: VPC Endpoint 내부 통신"]
-        L4["SG: 보안 그룹 (Instance 레벨 방화벽)"]
-        L5["NACL: 네트워크 ACL (Subnet 레벨 방화벽)"]
+        L1["🟦 퍼블릭 경로 (IGW)"]
+        L2["🟪 프라이빗 경로 (NAT GW)"]
+        L3["🟨 VPC Endpoint 내부 통신"]
+        L4["SG = 보안그룹 (Instance 레벨)"]
+        L5["NACL = 네트워크 ACL (Subnet 레벨)"]
     end
-    style Legend fill:#f9f9f9,stroke:#999,stroke-dasharray: 3 3
 
 ```
 ---
