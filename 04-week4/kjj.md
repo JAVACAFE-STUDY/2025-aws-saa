@@ -151,5 +151,5 @@ flowchart LR
 | 암호 저장 | 지원 | SecureString(KMS) 가능 |
 | 자동 로테이션 | 지원 (Lambda 기반) | 지원 안 함 |
 | 비용 | API 호출 및 저장 시 유료 | 기본 파라미터 무료, 고급은 유료 |
-
 | 통합성 | RDS, Redshift 등과 자동 통합 | 단순 구성 값 관리 위주 |
+
