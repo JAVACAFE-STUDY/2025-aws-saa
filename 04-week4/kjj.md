@@ -72,6 +72,14 @@ https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inli
 - Permission
   - 대상, 행위를 규정하는 Policy
 
+<img width="936" height="612" alt="image" src="https://github.com/user-attachments/assets/71cff1b4-09ee-40ec-b3c0-adb2e4db1d72" />      
+
+[Managed policies and inline policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html)  
+
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/56537547-03d7-4b7e-ac18-8932d86a1035" />
+
+[Identity and Access Management (IAM) in Amazon Web Services (AWS)](https://www.geeksforgeeks.org/devops/identity-and-access-management-iam-in-amazon-web-services-aws/)
+
 ```mermaid
 flowchart LR
     subgraph ID["Identity - Who?"]
@@ -119,13 +127,14 @@ flowchart LR
   - Resource: 정책이 적용되는 리소스 대상 (예: arn:aws:s3:::bucket-name/*)
   - Condition: 특정 조건에서만 정책이 적용되도록 제한
 
-https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2F%40mohasina.clt%2Faws-security-the-basics-of-iam-policies-730c34e0be1a&psig=AOvVaw11skTKuG26deQ-Fj-qjXJA&ust=1759256524012000&source=images&cd=vfe&opi=89978449&ved=0CBgQjhxqFwoTCIiA2bPL_o8DFQAAAAAdAAAAABB0
+<img width="1100" height="528" alt="image" src="https://github.com/user-attachments/assets/64b60369-02f6-4d44-91bb-25ab5cb67686" />
 
+[AWS Security: The Basics of IAM Policies](https://medium.com/@mohasina.clt/aws-security-the-basics-of-iam-policies-730c34e0be1a)
 
 ---
 
 ## KMS 키의 종류
-- AWS 관리형 키 (AWS Managed Key, aws/service-name): 서비스별 기본 제공, 자동 관리, 사용자 제어 불가  
+- AWS 관리형 키 (AWS Managed Key, aws/service-name): AWS가 제공, 자동 관리, 사용자 제어 불가  
   - SSE-S3 (Server-Side Encryption with S3 Managed Keys): S3가 자체 관리하는 키, 비용 최소, 사용자 제어 불가  
   - SSE-C (Server-Side Encryption with Customer-Provided Keys): 사용자가 직접 키를 제공, 키 관리 책임은 고객에게 있음  
 
@@ -142,4 +151,5 @@ https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2F%40mohasina.clt%2
 | 암호 저장 | 지원 | SecureString(KMS) 가능 |
 | 자동 로테이션 | 지원 (Lambda 기반) | 지원 안 함 |
 | 비용 | API 호출 및 저장 시 유료 | 기본 파라미터 무료, 고급은 유료 |
+
 | 통합성 | RDS, Redshift 등과 자동 통합 | 단순 구성 값 관리 위주 |
