@@ -1,0 +1,171 @@
+format,body,additionalText,options,correctOptions,multiple,abstentionsAllowed,duration
+CHOICE,"BH-Q1. 
+한 회사가 NFS를 사용하여 온프레미스 네트워크 연결 스토리지에 대용량 비디오 파일을 저장합니다. 각 비디오 파일의 크기는 1MB에서 500GB까지입니다. 
+총 스토리지는 70TB이며 더 이상 증가하지 않습니다. 회사는 비디오 파일을 Amazon S3로 마이그레이션하기로 결정했습니다. 
+회사는 가능한 한 빨리 비디오 파일을 마이그레이션해야 하며 가능한 한 최소한의 네트워크 대역폭을 사용해야 합니다.
+
+어떤 솔루션이 이러한 요구 사항을 충족할까요?",,"A. S3 버킷을 만듭니다. S3 버킷에 쓸 수 있는 권한이 있는 IAM 역할을 만듭니다. AWS CLI를 사용하여 모든 파일을 로컬로 S3 버킷에 복사합니다.
+B. AWS Snowball Edge 작업을 만듭니다. 온프레미스에서 Snowball Edge 장치를 받습니다. Snowball Edge 클라이언트를 사용하여 데이터를 장치로 전송합니다. AWS가 Amazon S3로 데이터를 가져올 수 있도록 장치를 반환합니다.
+C. 온프레미스에 S3 파일 게이트웨이를 배포합니다. S3 파일 게이트웨이에 연결할 퍼블릭 서비스 엔드포인트를 만듭니다. S3 버킷을 만듭니다. S3파일 게이트웨이에 새 NFS 파일 공유를 만듭니다. 새 파일 공유를 S3 버킷으로 지정합니다. 기존 NFS 파일 공유에서 S3 파일 게이트웨이로 데이터를 전송합니다.
+D. 온프레미스 네트워크와 AWS 간에 AWS Direct Connect 연결을 설정합니다. 온프레미스에 S3 파일 게이트웨이를 배포합니다. S3 파일 게이트웨이에 연결할 퍼블릭 가상 인터페이스(VIF)를 만듭니다. S3 버킷을 만듭니다. S3 파일 게이트웨이에 새 NFS 파일 공유를 만듭니다. 새 파일 공유를S3 버킷으로 지정합니다. 기존 NFS 파일 공유에서 S3 파일 게이트웨이로 데이터를 전송합니다.","B. AWS Snowball Edge 작업을 만듭니다. 온프레미스에서 Snowball Edge 장치를 받습니다. Snowball Edge 클라이언트를 사용하여 데이터를 장치로 전송합니다. AWS가 Amazon S3로 데이터를 가져올 수 있도록 장치를 반환합니다.",false,false,90
+CHOICE,"BH-Q2. 
+
+한 회사가 자사 데이터 센터의 대규모 네트워크 연결 스토리지(NAS) 시스템에 700테라바이트의 데이터를 저장하고 있습니다. 이 회사는 10Gbps AWS Direct Connect 연결이 있는 하이브리드 환경을 보유하고 있습니다. 
+규제 기관의 감사 후, 이 회사는 90일 내에 데이터를 클라우드로 이전해야 합니다. 이 회사는 데이터를 효율적이고 중단 없이 이전해야 합니다. 이 회사는 여전히 이전 기간 동안 데이터에 액세스하고 업데이트할 수 있어야 합니다.
+
+어떤 솔루션이 이러한 요구 사항을 충족할까요?",,"A. 기업 데이터 센터에서 AWS DataSync 에이전트를 만듭니다. 데이터 전송 작업을 만듭니다. Amazon S3 버킷으로 전송을 시작합니다.
+B. AWS Snowball Edge Storage Optimized 디바이스에 데이터를 백업합니다. 디바이스를 AWS 데이터 센터로 배송합니다. 온프레미스 파일 시스템에 대상 Amazon S3 버킷을 마운트합니다.
+C. rsync를 사용하여 Direct Connect 연결을 통해 로컬 스토리지에서 지정된 Amazon S3 버킷으로 데이터를 직접 복사합니다.
+D. 테이프에 데이터를 백업합니다. 테이프를 AWS 데이터 센터로 배송합니다. 온프레미스 파일 시스템에 대상 Amazon S3 버킷을 마운트합니다","A. 기업 데이터 센터에서 AWS DataSync 에이전트를 만듭니다. 데이터 전송 작업을 만듭니다. Amazon S3 버킷으로 전송을 시작합니다.",false,false,90
+CHOICE,"BH-Q3. 
+
+한 회사에서 UDP 연결을 사용하는 VoIP(Voice over Internet Protocol) 서비스를 제공합니다. 이 서비스는 Auto Scaling 그룹에서 실행되는 Amazon EC2 인스턴스로 구성되어 있습니다. 
+
+이 회사는 여러 AWS 지역에 배포를 보유하고 있습니다. 이 회사는 사용자를 가장 낮은 지연 시간을 가진 지역으로 라우팅해야 합니다. 이 회사는 또한 지역 간의 자동화된 장애 조치가 필요합니다.
+
+어떤 솔루션이 이러한 요구 사항을 충족할까요?",,"A. 네트워크 로드 밸런서(NLB)와 연관된 대상 그룹을 배포합니다. 대상 그룹을 Auto Scaling 그룹과 연결합니다. 각 리전에서 NLB를 AWS Global Accelerator 엔드포인트로 사용합니다.
+B. Application Load Balancer(ALB)와 연관된 대상 그룹을 배포합니다. 대상 그룹을 Auto Scaling 그룹과 연결합니다. 각 리전에서 ALB를 AWS Global Accelerator 엔드포인트로 사용합니다.
+C. 네트워크 로드 밸런서(NLB)와 연관된 대상 그룹을 배포합니다. 대상 그룹을 Auto Scaling 그룹과 연결합니다. 각 NLB에 대한 별칭을 가리키는 Amazon Route 53 대기 시간 레코드를 만듭니다. 대기 시간 레코드를 오리진으로 사용하는 Amazon CloudFront 배포를 만듭니다.
+D. Application Load Balancer(ALB)와 연관된 대상 그룹을 배포합니다. 대상 그룹을 Auto Scaling 그룹과 연결합니다. 각 ALB에 대한 별칭을 가리키는 Amazon Route 53 가중 레코드를 만듭니다. 가중 레코드를 오리진으로 사용하는 Amazon CloudFront 배포를 배포합니다","A. 네트워크 로드 밸런서(NLB)와 연관된 대상 그룹을 배포합니다. 대상 그룹을 Auto Scaling 그룹과 연결합니다. 각 리전에서 NLB를 AWS Global Accelerator 엔드포인트로 사용합니다.",false,false,90
+CHOICE,"BH-Q4. 
+
+한 회사가 Amazon API Gateway를 사용하여 타사 서비스 제공자가 액세스하는 REST API를 관리합니다. 회사는 REST API를 SQL 주입 및 크로스 사이트 스크립팅 공격으로부터 보호해야 합니다.
+
+이러한 요구 사항을 충족하는 가장 운영 효율적인 솔루션은 무엇입니까?",,"A. AWS Shield를 구성합니다.
+B. AWS WAF를 구성합니다.
+C. Amazon CloudFront 배포를 사용하여 API Gateway를 설정합니다. CloudFront에서 AWS Shield를 구성합니다.
+D. Amazon CloudFront 배포를 사용하여 API Gateway를 설정합니다. CloudFront에서 AWS WAF를 구성합니다","B. AWS WAF를 구성합니다.",false,false,90
+CHOICE,"BH-Q5. 
+솔루션 아키텍트는 VPC의 Amazon EC2 인스턴스에서 Amazon DynamoDB로의 API 호출이 인터넷을 통과하지 않도록 해야 합니다.
+
+솔루션 아키텍트는 이 요구 사항을 충족하기 위해 어떤 단계 조합을 취해야 합니까? 
+(두 가지를 선택하세요.)",,"A. 엔드포인트에 대한 라우팅 테이블 항목을 만듭니다.
+B. DynamoDB에 대한 게이트웨이 엔드포인트를 생성합니다.
+C. Amazon EC2에 대한 인터페이스 엔드포인트를 생성합니다.
+D. VPC의 각 서브넷에 있는 엔드포인트에 대한 탄력적 네트워크 인터페이스를 생성합니다.
+E. 액세스를 제공하기 위해 엔드포인트의 보안 그룹에 보안 그룹 항목을 만듭니다.","A. 엔드포인트에 대한 라우팅 테이블 항목을 만듭니다.
+B. DynamoDB에 대한 게이트웨이 엔드포인트를 생성합니다.",true,false,90
+CHOICE,"JJ-Q1. 
+한 회사가 온프레미스에 150TB의 보관된 이미지 데이터를 저장해 두었는데, 다음 달 안에 AWS 클라우드로 옮겨야 합니다. 회사의 현재 네트워크 연결은 밤에만 이 목적으로 최대 100Mbps 업로드를 허용합니다.
+
+이 데이터를 옮기고 마이그레이션 마감일을 맞추는 가장 비용 효율적인 메커니즘은 무엇입니까?",,"A. AWS Snowmobile을 사용하여 AWS로 데이터를 전송합니다.
+B. 여러 개의 AWS Snowball 장치를 주문하여 데이터를 AWS로 배송합니다.
+C. Amazon S3 전송 가속(Tranfer Acceleration)을 활성화하고 데이터를 안전하게 업로드합니다.
+D. Amazon S3 VPC 엔드포인트를 생성하고 VPN을 설정하여 데이터를 업로드합니다","B. 여러 개의 AWS Snowball 장치를 주문하여 데이터를 AWS로 배송합니다.",false,false,90
+CHOICE,"JJ-Q2. 한 회사는 단일 공장에 있는 여러 기계에서 매일 10TB의 계측 데이터를 수신합니다. 이 데이터는 공장 내에 있는 온프레미스 데이터 센터의 SAN(스토리지 영역 네트워크)에 저장된 JSON 파일로 구성됩니다. 
+이 회사는 이 데이터를 Amazon S3로 보내서 중요한 거의 실시간 분석을 제공하는 여러 추가 시스템에서 액세스할 수 있도록 하려고 합니다. 데이터가 민감한 것으로 간주되므로 안전한 전송이 중요합니다.
+가장 안정적인 데이터 전송을 제공하는 솔루션은 무엇입니까?",,"A. 공개 인터넷을 통한 AWS DataSync
+B. AWS Direct Connect를 통한 AWS DataSync
+C. 공용 인터넷을 통한 AWS Database Migration Service(AWS DMS)
+D. AWS Direct Connect를 통한 AWS Database Migration Service(AWS DMS)","B. AWS Direct Connect를 통한 AWS DataSync",false,false,90
+CHOICE,"JJ-Q3. 온라인 게임 회사가 회사의 성장하는 사용자 기반을 지원하기 위해 사용자 데이터 저장소를 Amazon DynamoDB로 전환하고 있습니다. 현재 아키텍처에는 사용자 프로필, 업적 및 게임 내 거래가 포함된 DynamoDB 테이블이 포함됩니다.
+이 회사는 사용자에게 원활한 게임 경험을 유지하기 위해 견고하고 지속적으로 사용 가능하며 회복성이 있는 DynamoDB 아키텍처를 설계해야 합니다.
+이러한 요구 사항을 가장 비용 효율적으로 충족할 솔루션은 무엇입니까?",,"A. 단일 AWS 리전에서 DynamoDB 테이블을 만듭니다. 온디맨드 용량 모드를 사용합니다. 글로벌 테이블을 사용하여 여러 리전에 데이터를 복제합니다.
+B. DynamoDB Accelerator(DAX)를 사용하여 자주 액세스하는 데이터를 캐시합니다. 단일 AWS 리전에 테이블을 배포하고 자동 확장을 활성화합니다. 추가 리전에 대한 크로스 리전 복제를 수동으로 구성합니다.
+C. 여러 AWS 리전에 DynamoDB 테이블을 만듭니다. 온디맨드 용량 모드를 사용합니다. 리전 간 크로스 리전 복제를 위해 DynamoDB Streams를 사용합니다.
+D. DynamoDB 글로벌 테이블을 사용하여 자동 다중 리전 복제를 수행합니다. 여러 AWS 리전에 테이블을 배포합니다. 프로비저닝된 용량 모드를 사용합니다. 자동 스케일링을 활성화합니다.","D. DynamoDB 글로벌 테이블을 사용하여 자동 다중 리전 복제를 수행합니다. 여러 AWS 리전에 테이블을 배포합니다. 프로비저닝된 용량 모드를 사용합니다. 자동 스케일링을 활성화합니다.",false,false,90
+CHOICE,"JJ-Q4. 회사의 웹 애플리케이션은 Application Load Balancer 뒤의 Amazon EC2 인스턴스에서 실행 중입니다. 
+회사는 최근 정책을 변경하여 이제 애플리케이션에 특정 국가에서만 액세스해야 합니다.
+어떤 구성이 이 요구 사항을 충족할까요?",,"A. EC2 인스턴스에 대한 보안 그룹을 구성합니다.
+B. Application Load Balancer에서 보안 그룹을 구성합니다.
+C. VPC의 Application Load Balancer에 AWS WAF를 구성합니다.
+D. EC2 인스턴스가 포함된 서브넷에 대한 네트워크 ACL을 구성합니다","C. VPC의 Application Load Balancer에 AWS WAF를 구성합니다.",false,false,90
+CHOICE,"JJ-Q5. 한 회사의 이미지 호스팅 웹사이트는 전 세계 사용자에게 모바일 기기에서 이미지를 업로드, 보기, 다운로드할 수 있는 기능을 제공합니다. 이 회사는 현재 Amazon S3 버킷에서 정적 웹사이트를 호스팅하고 있습니다.
+웹사이트의 인기가 높아짐에 따라 웹사이트 성능이 저하되었습니다. 사용자는 이미지를 업로드하고 다운로드할 때 지연 문제가 있다고 보고했습니다.
+이 회사는 웹사이트의 성능을 개선해야 합니다.
+
+어떤 솔루션이 최소한의 구현 노력으로 이러한 요구 사항을 충족할까요?",,"A. S3 버킷에 대한 Amazon CloudFront 배포를 구성하여 다운로드 성능을 개선합니다. S3 Transfer Acceleration을 활성화하여 업로드 성능을 개선합니다.
+B. 여러 AWS 지역에서 적절한 크기의 Amazon EC2 인스턴스를 구성합니다. 애플리케이션을 EC2 인스턴스로 마이그레이션합니다. Application Load Balancer를 사용하여 웹사이트 트래픽을 EC2 인스턴스에 균등하게 분산합니다. AWS Global Accelerator를 구성하여 낮은 지연 시간으로 글로벌 수요를 처리합니다.
+C. S3 버킷을 오리진으로 사용하는 Amazon CloudFront 배포를 구성하여 다운로드 성능을 개선합니다. CloudFront를 사용하여 이미지 업로드 성능을 개선하도록 애플리케이션을 구성합니다. 여러 AWS 리전에 S3 버킷을 만듭니다. 버킷에 대한 복제 규칙을 구성하여 사용자의 위치를 기반으로 사용자의 데이터를 복제합니다. 각 사용자의 위치에 가장 가까운 S3 버킷으로 다운로드를 리디렉션합니다.
+D. 네트워크 성능을 개선하기 위해 S3 버킷에 대한 AWS Global Accelerator를 구성합니다. S3 버킷 대신 Global Accelerator를 사용하도록 애플리케이션에 대한 엔드포인트를 만듭니다.","A. S3 버킷에 대한 Amazon CloudFront 배포를 구성하여 다운로드 성능을 개선합니다. S3 Transfer Acceleration을 활성화하여 업로드 성능을 개선합니다.",false,false,90
+CHOICE,"YH-Q1. 회사는 30일 이내에 데이터 센터에서 AWS 클라우드로 20TB의 데이터를 마이그레이션해야 합니다. 회사의 네트워크 대역폭은 15Mbps로 제한되며 사용률은 70%를 초과할 수 없습니다.
+
+솔루션 아키텍트는 이러한 요구 사항을 충족하기 위해 무엇을 해야 합니까?",,"A. AWS Snowball을 사용하세요.
+B. AWS DataSync를 사용합니다.
+C. 안전한 VPN 연결을 사용하세요.
+D. Amazon S3 전송 가속을 사용합니다","A. AWS Snowball을 사용하세요.",false,false,90
+CHOICE,"YH-Q2. 회사가 사내에 데이터를 저장합니다. 데이터 양이 회사의 가용 용량을 초과하여 증가하고 있습니다. 회사는 사내 위치에서 Amazon S3 버킷으로 데이터를 마이그레이션하려고 합니다. 회사는 전송 후 데이터 무결성을 자동으로 검증하는 솔루션이 필요합니다.
+어떤 솔루션이 이러한 요구 사항을 충족할까요?",,"A. AWS Snowball Edge 장치를 주문합니다. Snowball Edge 장치를 구성하여 S3 버킷으로 온라인 데이터 전송을 수행합니다.
+B. 온프레미스에 AWS DataSync 에이전트를 배포합니다. DataSync 에이전트를 구성하여 S3 버킷으로 온라인 데이터 전송을 수행합니다.
+C. 온프레미스에서 Amazon S3 파일 게이트웨이 생성 S3 파일 게이트웨이를 구성하여 S3 버킷으로 온라인 데이터 전송을 수행합니다.
+D. 온프레미스에서 Amazon S3 Transfer Acceleration에서 가속기를 구성합니다. 가속기를 구성하여 S3 버킷으로 온라인 데이터 전송을 수행합니다.","B. 온프레미스에 AWS DataSync 에이전트를 배포합니다. DataSync 에이전트를 구성하여 S3 버킷으로 온라인 데이터 전송을 수행합니다.",false,false,90
+CHOICE,"YH-Q3. 한 회사가 TCP 기반 애플리케이션을 회사의 VPC로 마이그레이션할 계획입니다. 이 애플리케이션은 회사 데이터 센터의 하드웨어 어플라이언스를 통해 비표준 TCP 포트에서 공개적으로 액세스할 수 있습니다. 
+이 퍼블릭 엔드포인트는 낮은 지연 시간으로 초당 최대 300만 개의 요청을 처리할 수 있습니다. 이 회사는 AWS의 새로운 퍼블릭 엔드포인트에 대해 동일한 수준의 성능이 필요합니다.
+솔루션 아키텍트는 이 요구 사항을 충족하기 위해 무엇을 권장해야 합니까?",,"A. 네트워크 로드 밸런서(NLB)를 배포합니다. 애플리케이션에 필요한 TCP 포트를 통해 공개적으로 액세스할 수 있도록 NLB를 구성합니다.
+B. 애플리케이션 로드 밸런서(ALB)를 배포합니다. 애플리케이션에 필요한 TCP 포트를 통해 ALB를 공개적으로 액세스할 수 있도록 구성합니다.
+C. 애플리케이션에 필요한 TCP 포트에서 수신 대기하는 Amazon CloudFront 배포를 배포합니다. Application Load Balancer를 원본으로 사용합니다.
+D. 애플리케이션에 필요한 TCP 포트로 구성된 Amazon API Gateway API를 배포합니다. 요청을 처리하기 위해 프로비저닝된 동시성을 사용하여 AWS Lambda 함수를 구성합니다","A. 네트워크 로드 밸런서(NLB)를 배포합니다. 애플리케이션에 필요한 TCP 포트를 통해 공개적으로 액세스할 수 있도록 NLB를 구성합니다.",false,false,90
+CHOICE,"YH-Q4. 미디어 회사가 AWS에서 웹사이트를 호스팅합니다. 웹사이트 애플리케이션의 아키텍처에는 Application Load Balancer(ALB) 뒤에 있는 Amazon EC2 인스턴스 플릿과 Amazon Aurora에서 호스팅되는 데이터베이스가 포함됩니다. 
+이 회사의 사이버 보안 팀은 이 애플리케이션이 SQL 주입에 취약하다고 보고합니다.
+이 회사는 이 문제를 어떻게 해결해야 할까요?",,"A. ALB 앞에 AWS WAF를 사용합니다. 적절한 웹 ACL을 AWS WAF와 연결합니다.
+B. SQL 주입에 고정된 응답으로 응답하기 위한 ALB 리스너 규칙을 만듭니다.
+C. AWS Shield Advanced에 가입하여 모든 SQL 주입 시도를 자동으로 차단합니다.
+D. Amazon Inspector를 설정하여 모든 SQL 주입 시도를 자동으로 차단합니다","A. ALB 앞에 AWS WAF를 사용합니다. 적절한 웹 ACL을 AWS WAF와 연결합니다.",false,false,90
+CHOICE,"YH-Q5. 솔루션 아키텍트는 AWS CloudFormation 템플릿을 사용하여 3계층 웹 애플리케이션을 배포하고 있습니다. 웹 애플리케이션은 웹 계층과 Amazon DynamoDB 테이블에 사용자 데이터를 저장하고 검색하는 애플리케이션 계층으로 구성됩니다. 
+웹 및 애플리케이션 계층은 Amazon EC2 인스턴스에 호스팅되고 데이터베이스 계층은 공개적으로 액세스할 수 없습니다. 애플리케이션 EC2 인스턴스는 템플릿에서 API 자격 증명을 노출하지 않고도 DynamoDB 테이블에 액세스해야 합니다.
+솔루션 아키텍트는 이러한 요구 사항을 충족하기 위해 무엇을 해야 합니까?",,"A. DynamoDB 테이블을 읽기 위한 IAM 역할을 만듭니다. 인스턴스 프로필을 사용하여 역할을 애플리케이션 인스턴스와 연결합니다.
+B. DynamoDB 테이블에서 읽고 쓸 수 있는 필요 권한이 있는 IAM 역할을 만듭니다. EC2 인스턴스 프로필에 역할을 추가하고 인스턴스 프로필을 애플리케이션 인스턴스와 연결합니다.
+C. AWS CloudFormation 템플릿의 매개변수 섹션을 사용하여 사용자가 DynamoDB 테이블에서 읽고 쓸 수 있는 필요한 권한이 있는 이미 생성된 IAM 사용자의 액세스 및 비밀 키를 입력하도록 합니다.
+D. AWS CloudFormation 템플릿에서 DynamoDB 테이블에서 읽고 쓸 수 있는 필수 권한이 있는 IAM 사용자를 만듭니다. GetAtt 함수를 사용하여 액세스 및 비밀 키를 검색하고 사용자 데이터를 통해 애플리케이션 인스턴스로 전달합니다","B. DynamoDB 테이블에서 읽고 쓸 수 있는 필요 권한이 있는 IAM 역할을 만듭니다. EC2 인스턴스 프로필에 역할을 추가하고 인스턴스 프로필을 애플리케이션 인스턴스와 연결합니다.",false,false,90
+CHOICE,"RU-Q1. 한 회사는 데이터 센터의 네트워크 연결 스토리지(NAS)에 700TB의 백업 데이터를 저장하고 있습니다. 이 백업 데이터는 드물게 발생하는 규제 요청에 액세스할 수 있어야 하며 7년간 보관해야 합니다. 이 회사는 이 백업 데이터를 데이터 센터에서 AWS로 마이그레이션하기로 결정했습니다. 마이그레이션은 1개월 이내에 완료해야 합니다. 이 회사는 데이터 전송에 사용할 수 있는 공용 인터넷 연결에서 500Mbps의 전용 대역폭을 보유하고 있습니다.
+솔루션 아키텍트는 가장 낮은 비용으로 데이터를 마이그레이션하고 저장하기 위해 무엇을 해야 할까요?",,"A. AWS Snowball 디바이스를 주문하여 데이터를 전송합니다. 라이프사이클 정책을 사용하여 파일을 Amazon S3 Glacier Deep Archive로 전환합니다.
+B. 데이터 센터와 Amazon VPC 간에 VPN 연결을 배포합니다. AWS CLI를 사용하여 온프레미스에서 Amazon S3 Glacier로 데이터를 복사합니다.
+C. 500Mbps AWS Direct Connect 연결을 프로비저닝하고 데이터를 Amazon S3로 전송합니다. 라이프사이클 정책을 사용하여 파일을 Amazon S3 Glacier Deep Archive로 전환합니다.
+D. AWS DataSync를 사용하여 데이터를 전송하고 온프레미스에서 DataSync 에이전트를 배포합니다. DataSync 작업을 사용하여 온프레미스 NAS스토리지에서 Amazon S3 Glacier로 파일을 복사합니다.","A. AWS Snowball 디바이스를 주문하여 데이터를 전송합니다. 라이프사이클 정책을 사용하여 파일을 Amazon S3 Glacier Deep Archive로 전환합니다.",false,false,90
+CHOICE,"RU-Q2. 한 회사가 최근 다른 AWS 지역에 재해 복구 사이트를 만들었습니다. 이 회사는 두 지역의 NFS 파일 시스템 간에 주기적으로 대량의 데이터를 주고받아
+야 합니다.
+어떤 솔루션이 가장 적은 운영 오버헤드로 이러한 요구 사항을 충족할까요?",,"A. AWS DataSync를 사용합니다.
+B. AWS Snowball 장치를 사용합니다.
+C. Amazon EC2에 SFTP 서버를 설정합니다.
+D. AWS Database Migration Service(AWS DMS)를 사용합니다","A. AWS DataSync를 사용합니다.",false,false,90
+CHOICE,"RU-Q3. 솔루션 아키텍트는 웹, 애플리케이션, 데이터베이스 계층으로 구성된 고가용성 애플리케이션을 설계해야 합니다. HTTPS 콘텐츠 전송은 가능한 한 엣지에 가까워야 하며, 전송 시간은 가장 짧아야 합니다.
+어떤 솔루션이 이러한 요구 사항을 충족하고 가장 안전할까요?",,"A. 퍼블릭 서브넷에 여러 개의 중복 Amazon EC2 인스턴스가 있는 퍼블릭 Application Load Balancer(ALB)를 구성합니다. 퍼블릭 ALB를 원본으로사용하여 HTTPS 콘텐츠를 제공하도록 Amazon CloudFront를 구성합니다.
+B. 프라이빗 서브넷에 여러 개의 중복 Amazon EC2 인스턴스가 있는 퍼블릭 애플리케이션 로드 밸런서를 구성합니다. EC2 인스턴스를 원본으로 사용하여 HTTPS 콘텐츠를 제공하도록 Amazon CloudFront를 구성합니다.
+C. 프라이빗 서브넷에 여러 개의 중복 Amazon EC2 인스턴스가 있는 퍼블릭 애플리케이션 로드 밸런서(ALB)를 구성합니다. 퍼블릭 ALB를 원본으로 사용하여 HTTPS 콘텐츠를 전송하도록 Amazon CloudFront를 구성합니다.
+D. 퍼블릭 서브넷에 여러 개의 중복 Amazon EC2 인스턴스가 있는 퍼블릭 애플리케이션 로드 밸런서를 구성합니다. EC2 인스턴스를 원본으로 사용하여 HTTPS 콘텐츠를 제공하도록 Amazon CloudFront를 구성합니다","C. 프라이빗 서브넷에 여러 개의 중복 Amazon EC2 인스턴스가 있는 퍼블릭 애플리케이션 로드 밸런서(ALB)를 구성합니다. 퍼블릭 ALB를 원본으로 사용하여 HTTPS 콘텐츠를 전송하도록 Amazon CloudFront를 구성합니다.",false,false,90
+CHOICE,"RU-Q4. 한 회사가 자동 확장 그룹의 애플리케이션 로드 밸런서(ALB) 뒤에서 Amazon EC2 인스턴스에서 전자상거래 웹사이트를 운영합니다. 이 사이트는 IP 주소가 변경되는 불법 외부 시스템에서 높은 요청률과 관련된 성능 문제를 겪고 있습니다. 
+보안팀은 웹사이트에 대한 잠재적인 DDoS 공격을 걱정하고 있습니다. 이 회사는 합법적 사용자에게 최소한의 영향을 미치는 방식으로 불법적인 수신 요청을 차단해야 합니다.
+
+솔루션 아키텍트는 무엇을 권장해야 합니까?",,"A. Amazon Inspector를 배포하고 ALB와 연결합니다.
+B. AWS WAF를 배포하고 ALB와 연결한 후 속도 제한 규칙을 구성합니다.
+C. ALB와 연관된 네트워크 ACL에 규칙을 배포하여 유입 트래픽을 차단합니다.
+D. Amazon GuardDuty를 배포하고 GuardDuty를 구성할 때 속도 제한 보호를 활성화합니다","B. AWS WAF를 배포하고 ALB와 연결한 후 속도 제한 규칙을 구성합니다.",false,false,90
+CHOICE,"RU-Q5. 서버리스 애플리케이션은 Amazon API Gateway, AWS Lambda, Amazon DynamoDB를 사용합니다. 
+Lambda 함수는 DynamoDB 테이블을 읽고 쓸 수 있는 권한이 필요합니다.
+Lambda 함수가 DynamoDB 테이블에 가장 안전하게 액세스할 수 있는 솔루션은 무엇입니까?",,"A. Lambda 함수에 대한 프로그래밍 액세스 권한이 있는 IAM 사용자를 만듭니다. DynamoDB 테이블에 대한 읽기 및 쓰기 액세스를 허용하는 정책을 사용자에게 연결합니다. Lambda 환경 변수의 일부로 access_key_id 및 secret_access_key 매개변수를 저장합니다. 다른 AWS 사용자에게 Lambda 함수 구성에 대한 읽기 및 쓰기 액세스 권한이 없는지 확인합니다.
+B. Lambda를 신뢰할 수 있는 서비스로 포함하는 IAM 역할을 만듭니다. DynamoDB 테이블에 대한 읽기 및 쓰기 액세스를 허용하는 정책을 역할에 연결합니다. Lambda 함수의 구성을 업데이트하여 새 역할을 실행 역할로 사용합니다.
+C. Lambda 함수에 대한 프로그래밍 액세스 권한이 있는 IAM 사용자를 만듭니다. DynamoDB 테이블에 대한 읽기 및 쓰기 액세스를 허용하는 정책을 사용자에게 연결합니다. AWS Systems Manager Parameter Store에 access_key_id 및 secret_access_key 매개변수를 보안 문자열 매개변수로 저장합니다. DynamoDB 테이블에 연결하기 전에 Lambda 함수 코드를 업데이트하여 보안 문자열 매개변수를 검색합니다.
+D. DynamoDB를 신뢰할 수 있는 서비스로 포함하는 IAM 역할을 만듭니다. Lambda 함수에서 읽기 및 쓰기 액세스를 허용하는 정책을 역할에 연결합니다. Lambda 함수의 코드를 업데이트하여 실행 역할로 새 역할에 연결합니다","B. Lambda를 신뢰할 수 있는 서비스로 포함하는 IAM 역할을 만듭니다. DynamoDB 테이블에 대한 읽기 및 쓰기 액세스를 허용하는 정책을 역할에 연결합니다. Lambda 함수의 구성을 업데이트하여 새 역할을 실행 역할로 사용합니다.",false,false,90
+CHOICE,"CY-Q1. 한 회사가 온프레미스 네트워크 연결 스토리지(NAS) 시스템에서 AWS 클라우드로 600TB의 데이터를 전송해야 합니다. 데이터 전송은 2주 이내에 완료되어야 합니다. 데이터는 민감하므로 전송 중에 암호화해야 합니다. 회사의 인터넷 연결은 100Mbps의 업로드 속도를 지원할 수 있습니다.
+
+어떤 솔루션이 이러한 요구 사항을 가장 비용 효율적으로 충족합니까?",,"A. Amazon S3 다중 파트 업로드 기능을 사용하여 HTTPS를 통해 파일을 전송합니다.
+B. 온프레미스 NAS 시스템과 가장 가까운 AWS 리전 간에 VPN 연결을 만듭니다. VPN 연결을 통해 데이터를 전송합니다.
+C. AWS Snow Family 콘솔을 사용하여 여러 AWS Snowball Edge Storage Optimized 장치를 주문합니다. 장치를 사용하여 데이터를 Amazon S3로 전송합니다.
+D. 회사 위치와 가장 가까운 AWS 지역 간에 10Gbps AWS Direct Connect 연결을 설정합니다. VPN 연결을 통해 데이터를 지역으로 전송하여 Amazon S3에 데이터를 저장합니다","C. AWS Snow Family 콘솔을 사용하여 여러 AWS Snowball Edge Storage Optimized 장치를 주문합니다. 장치를 사용하여 데이터를 Amazon S3로 전송합니다.",false,false,90
+CHOICE,"CY-Q2. 한 회사가 헬스케어 애플리케이션의 데이터를 저장해야 합니다. 애플리케이션의 데이터는 자주 변경됩니다. 새로운 규정에 따라 저장된 데이터의 모든 수준에서 감사 액세스가 필요합니다. 이 회사는 스토리지 용량이 부족한 온프레미스 인프라에서 애플리케이션을 호스팅합니다. 솔루션 아키텍트는 새로운 규정을 충족하는 동시에 기존 데이터를 AWS로 안전하게 마이그레이션해야 합니다.
+
+어떤 솔루션이 이러한 요구 사항을 충족할까요?",,"A. AWS DataSync를 사용하여 기존 데이터를 Amazon S3로 이동합니다. AWS CloudTrail을 사용하여 데이터 이벤트를 기록합니다.
+B. AWS Snowcone을 사용하여 기존 데이터를 Amazon S3로 이동합니다. AWS CloudTrail을 사용하여 관리 이벤트를 기록합니다.
+C. Amazon S3 Transfer Acceleration을 사용하여 기존 데이터를 Amazon S3로 이동합니다. AWS CloudTrail을 사용하여 데이터 이벤트를 기록합니다.
+D. AWS Storage Gateway를 사용하여 기존 데이터를 Amazon S3로 이동합니다. AWS CloudTrail을 사용하여 관리 이벤트를 기록합니다.","A. AWS DataSync를 사용하여 기존 데이터를 Amazon S3로 이동합니다. AWS CloudTrail을 사용하여 데이터 이벤트를 기록합니다.",false,false,90
+CHOICE,"CY-Q3. 한 회사가 AWS에서 실행되는 인기 있는 게임 플랫폼을 보유하고 있습니다. 이 애플리케이션은 지연 시간에 민감합니다. 지연 시간은 사용자 경험에 영향을 미치고 일부 플레이어에게 불공평한 이점을 제공할 수 있기 때문입니다. 이 애플리케이션은 모든 AWS 지역에 배포됩니다. 
+이 애플리케이션은 애플리케이션 로드 밸런서(ALB) 뒤에 구성된 자동 확장 그룹의 일부인 Amazon EC2 인스턴스에서 실행됩니다. 솔루션 아키텍트는 애플리케이션의 상태를 모니터링하고 트래픽을 정상적인 엔드포인트로 리디렉션하는 메커니즘을 구현해야 합니다.
+어떤 솔루션이 이러한 요구 사항을 충족합니까?",,"A. AWS Global Accelerator에서 가속기를 구성합니다. 애플리케이션이 수신 대기하는 포트에 대한 리스너를 추가하고 각 지역의 지역 엔드포인트에 연결합니다. ALB를 엔드포인트로 추가합니다.
+B. Amazon CloudFront 배포를 만들고 ALB를 오리진 서버로 지정합니다. 오리진 캐시 헤더를 사용하도록 캐시 동작을 구성합니다. AWS Lambda 함수를 사용하여 트래픽을 최적화합니다.
+C. Amazon CloudFront 배포를 만들고 Amazon S3를 오리진 서버로 지정합니다. 오리진 캐시 헤더를 사용하도록 캐시 동작을 구성합니다. AWS Lambda 함수를 사용하여 트래픽을 최적화합니다.
+D. 애플리케이션의 데이터 저장소 역할을 하는 Amazon DynamoDB 데이터베이스를 구성합니다. 애플리케이션 데이터를 호스팅하는 DynamoDB의메모리 내 캐시 역할을 하는 DynamoDB Accelerator(DAX) 클러스터를 만듭니다","A. AWS Global Accelerator에서 가속기를 구성합니다. 애플리케이션이 수신 대기하는 포트에 대한 리스너를 추가하고 각 지역의 지역 엔드포인트에 연결합니다. ALB를 엔드포인트로 추가합니다.",false,false,90
+CHOICE,"CY-Q4. 한 회사가 Amazon RDS 데이터베이스가 있는 Amazon EC2 인스턴스에 애플리케이션을 배포했습니다. 이 회사는 최소 권한 원칙을 사용하여 데이터베이스 액세스 자격 증명을 구성했습니다. 
+이 회사의 보안 팀은 SQL 주입 및 기타 웹 기반 공격으로부터 애플리케이션과 데이터베이스를 보호하려고 합니다.
+어떤 솔루션이 최소한의 운영 오버헤드로 이러한 요구 사항을 충족할까요?",,"A. 보안 그룹과 네트워크 ACL을 사용하여 데이터베이스와 애플리케이션 서버를 보호합니다.
+B. AWS WAF를 사용하여 애플리케이션을 보호합니다. RDS 매개변수 그룹을 사용하여 보안 설정을 구성합니다.
+C. AWS 네트워크 방화벽을 사용하여 애플리케이션과 데이터베이스를 보호합니다.
+D. 다른 기능에 대해 애플리케이션 코드에서 다른 데이터베이스 계정을 사용합니다. 데이터베이스 사용자에게 과도한 권한을 부여하지 마십시오.","B. AWS WAF를 사용하여 애플리케이션을 보호합니다. RDS 매개변수 그룹을 사용하여 보안 설정을 구성합니다.",false,false,90
+CHOICE,"CY-Q5. 회사의 거의 실시간 스트리밍 애플리케이션이 AWS에서 실행 중입니다. 데이터가 수집됨에 따라 데이터에서 작업이 실행되고 완료하는 데 30분이 걸립니다. 
+워크로드는 들어오는 데이터의 양이 많아 자주 높은 지연 시간을 경험합니다. 솔루션 아키텍트는 성능을 향상시키기 위해 확장 가능하고 서버리스 솔루션을 설계해야 합니다. 
+솔루션 아키텍트는 어떤 단계 조합을 취해야 합니까? 
+(두 가지를 선택하세요.)",,"A. Amazon Kinesis Data Firehose를 사용하여 데이터를 수집합니다.
+B. AWS Lambda를 AWS Step Functions와 함께 사용하여 데이터를 처리합니다.
+C. AWS Database Migration Service(AWS DMS)를 사용하여 데이터를 수집합니다.
+D. Auto Scaling 그룹에서 Amazon EC2 인스턴스를 사용하여 데이터를 처리합니다.
+E. Amazon ECS(Amazon Elastic Container Service)와 함께 AWS Fargate를 사용하여 데이터를 처리합니다.","A. Amazon Kinesis Data Firehose를 사용하여 데이터를 수집합니다.
+E. Amazon ECS(Amazon Elastic Container Service)와 함께 AWS Fargate를 사용하여 데이터를 처리합니다.",true,false,90
